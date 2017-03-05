@@ -6,7 +6,7 @@ var Candidate = require('../models/candidate');
 
 var candidate;
 
-mongoose.connect(config.test_db);
+mongoose.createConnection(config.test_db);
 
 describe('Candidate:model', function() {
 
