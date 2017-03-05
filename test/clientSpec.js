@@ -1,13 +1,14 @@
 var mongoose = require("mongoose");
 var expect = require('chai').expect;
+var config = require('../config/config');
 
 var Client = require('../models/client');
 
 var client;
 
-mongoose.connect('mongodb://localhost/cordant_test');
+mongoose.connect(config.test_db);
 
-describe('Client', function() {
+describe('Client:model', function() {
 
   beforeEach(function(done) {
     Client.remove({}, function(err) {
@@ -17,6 +18,7 @@ describe('Client', function() {
 
   it('should create a new Client', function (done) {
     client = {name: "Chris", postcode: "N1 4TY"}
+
     Client.create(client, function (err, createdClient) {
       expect(err).not.to.exist;
       expect(createdClient.name).to.equal("Chris")
