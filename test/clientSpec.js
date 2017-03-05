@@ -11,4 +11,13 @@ describe('Client', function() {
             done();
         });
     });
+
+    it('should be invalid if postcode is empty', function(done) {
+        var client = new Client();
+
+        client.validate(function(err) {
+            expect(err.errors.postcode).to.exist;
+            done();
+        });
+    });
 });
