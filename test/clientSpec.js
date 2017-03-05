@@ -1,20 +1,13 @@
-var mongoose = require("mongoose");
+"use strict";
+
 var expect = require('chai').expect;
-var config = require('../config/config');
+var utils = require('./utils');
 
 var Client = require('../models/client');
 
 var client;
 
-mongoose.connect(config.test_db);
-
 describe('Client:model', function() {
-
-  beforeEach(function(done) {
-    Client.remove({}, function(err) {
-      done();
-    });
-  });
 
   it('should create a new Client', function (done) {
     client = {name: "Chris", postcode: "N1 4TY"}

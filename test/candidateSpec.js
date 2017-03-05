@@ -1,20 +1,13 @@
-var mongoose = require("mongoose");
+"use strict";
+
 var expect = require('chai').expect;
-var config = require('../config/config');
+var utils = require('./utils');
 
 var Candidate = require('../models/candidate');
 
 var candidate;
 
-mongoose.createConnection(config.test_db);
-
 describe('Candidate:model', function() {
-
-  beforeEach(function(done) {
-    Candidate.remove({}, function(err) {
-      done();
-    });
-  });
 
   it('should create a new Candidate', function (done) {
     candidate = {name: "Chris", postcode: "N1 4TY", modeOfTransport: "walking"}
