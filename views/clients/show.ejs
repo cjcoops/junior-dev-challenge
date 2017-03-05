@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+  <title>Travel Times</title>
+</head>
+<body>
+  <h1><%= client.name %></h1>
+  <ul class="candidates">
+    <% for(var i=0; i<candidates.length; i++) {%>
+      <li class="candidate">
+        <span><%= candidates[i].name %></span>
+        <span><%= candidates[i].postcode %></span>
+      </li>
+    <% } %>
+  </ul>
+</body>
+</html>
