@@ -11,6 +11,8 @@ var app = express();
 app.use('/', index);
 app.use('/clients', clients);
 
+app.set('view engine', 'ejs');
+
 if(process.env.NODE_ENV === "test"){
   mongoose.connect(config.test_db);
   app.listen(config.test_port, function() {
