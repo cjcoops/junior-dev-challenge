@@ -1,19 +1,23 @@
-const express = require('express');
-const config = require('./config/config');
+var express = require('express');
+var config = require('./config/config');
 
-const index = require('./routes/index');
-const clients = require('./routes/clients');
+var index = require('./routes/index');
+var clients = require('./routes/clients');
 
-const app = express();
+var mongoose = require('mongoose');
+
+var app = express();
 
 app.use('/', index);
 app.use('/clients', clients);
 
 if(process.env.NODE_ENV === "test"){
+  mongoose.connect(config.test_db);
   app.listen(config.test_port, function() {
     console.log('listening on '+ config.test_port);
   });
 } else {
+  mongoose.connect(config.db);
   app.listen(config.port, function() {
     console.log('listening on '+ config.port);
   });

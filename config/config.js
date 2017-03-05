@@ -4,4 +4,5 @@ var config = {
 	test_port: 3001,
 	test_db: "mongodb://localhost/cordant_test"
 }
+
 module.exports = config;
