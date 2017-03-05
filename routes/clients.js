@@ -16,7 +16,7 @@ router.get('/:id', function(req, res, next) {
     Candidate.find(function(err, candidates) {
       if (err) console.log(err);
       res.render('clients/show', {client: client, candidates: candidates});
-    })
+    });
   });
 });
 
