@@ -31,25 +31,12 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	fetchAllClientsData()
-	fetchAllCandidatesData()
+	displayDistances()
 
-	var origin1 = {lat: 53.3996968, lng: -1.2817522999999937};
-	var origin2 = 'Greenwich, England';
-	var destinationA = 'Stockholm, Sweden';
-	var destinationB = {lat: 50.087, lng: 14.421};
-	var origins = [origin1, origin2];
-	var destinations = [destinationA, destinationB];
-	var modeOfTransport = "WALKING"
-
-	getDistanceMatrix(origins, destinations, modeOfTransport)
 })
 
 function fetchAllClientsData() {
-	fetch("/clients")
-	.then(function(response) {
-		return response.json();
-	})
-	.then(function(data) {
+	$.get("/clients", function(data) {
 		showClientsList(data)
 	})
 }
@@ -62,22 +49,21 @@ function showClientsList(data) {
 	$("#clients ul").html(clientsList);
 }
 
-function fetchAllCandidatesData() {
-	fetch("/candidates")
-	.then(function(response) {
-		return response.json();
-	})
-	.then(function(data) {
-		$("#candidates").text("CANDIDATES GO HERE");
+function displayDistances() {
+	$.getJSON("data/candidates.json", function(data){
+		var candidates = data.Candidates;
+		candidates.forEach(function(candidate) {
+			getDistanceMatrix(["N1 4FB"], candidate)
+		})
 	})
 }
 
-function getDistanceMatrix(origins, destinations, modeOfTransport) {
+function getDistanceMatrix(origin, candidate) {
 	var service = new google.maps.DistanceMatrixService;
 	service.getDistanceMatrix({
-		origins: origins,
-		destinations: destinations,
-		travelMode: modeOfTransport,
+		origins: origin,
+		destinations: [candidate.postcode],
+		travelMode: "DRIVING",
 		unitSystem: google.maps.UnitSystem.METRIC,
 		avoidHighways: false,
 		avoidTolls: false
@@ -85,9 +71,13 @@ function getDistanceMatrix(origins, destinations, modeOfTransport) {
 		if (status !== 'OK') {
 			alert('Error was: ' + status);
 		} else {
-			console.log(response)
-			return response;
+			var name = candidate.name;
+			var journey = response.rows[0].elements[0];
+			if (journey.status == "OK") {
+				var distance = journey.distance.text
+				var time = journey.duration.text
+				$("#candidates ul").append(`<li>${name} is ${distance} away. It will take ${time} to get there!</li>`)
 			}
 		}
-	)
+	})
 }
