@@ -1,17 +1,18 @@
 var express = require('express');
 var config = require('./config/config');
+var path = require('path');
 
 var index = require('./routes/index');
 var clients = require('./routes/clients');
-var distance = require('./routes/distance');
 
 var mongoose = require('mongoose');
 
 var app = express();
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/', index);
 app.use('/clients', clients);
-app.use('/distance', distance);
 
 app.set('view engine', 'ejs');
 
