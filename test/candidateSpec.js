@@ -10,13 +10,14 @@ var candidate;
 describe('Candidate:model', function() {
 
   it('should create a new Candidate', function (done) {
-    candidate = {name: "Chris", postcode: "N1 4TY", modeOfTransport: "walking"}
+    candidate = {name: "Chris", postcode: "N1 4TY", modeOfTransport: {type: "bike", speed: 15.5}}
 
     Candidate.create(candidate, function (err, createdCandidate) {
       expect(err).not.to.exist;
       expect(createdCandidate.name).to.equal("Chris")
       expect(createdCandidate.postcode).to.equal("N1 4TY")
-      expect(createdCandidate.modeOfTransport).to.equal("walking")
+      expect(createdCandidate.modeOfTransport.type).to.equal("bike")
+      expect(createdCandidate.modeOfTransport.speed).to.equal(15.5)
       done();
     });
   });
