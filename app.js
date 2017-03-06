@@ -4,6 +4,7 @@ var path = require('path');
 
 var index = require('./routes/index');
 var clients = require('./routes/clients');
+var candidates = require('./routes/candidates');
 
 var mongoose = require('mongoose');
 
@@ -13,6 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/clients', clients);
+app.use('/candidates', candidates);
 
 app.set('view engine', 'ejs');
 

@@ -68,7 +68,7 @@ function fetchAllCandidatesData() {
 		return response.json();
 	})
 	.then(function(data) {
-		$("#candidates ul").text("CANDIDATES GO HERE");
+		$("#candidates").text("CANDIDATES GO HERE");
 	})
 }
 
