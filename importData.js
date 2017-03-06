@@ -23,7 +23,7 @@ mongoose.connection.once("open", function() {
             console.log(newClient.name + " SAVED!")
           })
         })
-        candidateData.Candidates.forEach(function(client) {
+        candidateData.Candidates.forEach(function(candidate) {
           var newCandidate = new Candidate(candidate);
           newCandidate.save(function(err) {
             if (err) throw err;

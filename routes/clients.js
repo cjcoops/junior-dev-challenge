@@ -37,24 +37,20 @@ router.get('/:id', function(req, res, next) {
         }
         if (distances.status == 'OK') {
           for (var i = 0; i < candidates.length; i++) {
-            results[i] = {
-              "name":candidates[i].name,
-              "distance": distances.rows[0].elements[i].distance,
-              "duration": distances.rows[0].elements[i].duration
+            if (distances.rows[0].elements[i].status == "OK") {
+              results.push({
+                "name":candidates[i].name,
+                "distance": distances.rows[0].elements[i].distance,
+                "duration": distances.rows[0].elements[i].duration
+              })
             }
           }
-          console.log(results)
-          // res.render('clients/show', {client: client, results: results});
+          res.render('clients/show', {client: client, results: results});
         }
       });
-      console.log(results)
-      res.render('clients/show', {client: client, results: results});
+
     });
   });
 });
-
-
-
-
 
 module.exports = router;
