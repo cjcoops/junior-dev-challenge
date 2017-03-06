@@ -7,11 +7,12 @@
 </head>
 <body>
   <h1><%= client.name %></h1>
-  <ul class="candidates">
-    <% for(var i=0; i<candidates.length; i++) {%>
+  <ul class="results">
+    <% for(var i=0; i<results.length; i++) {%>
       <li class="candidate">
-        <span><%= candidates[i].name %></span>
-        <span><%= candidates[i].postcode %></span>
+        <span><%= results[i].name %></span>
+        <span><%= results[i].distance.text %></span>
+        <span><%= results[i].duration.text %></span>
       </li>
     <% } %>
   </ul>
