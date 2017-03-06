@@ -28,3 +28,25 @@ $(document).ready(function() {
   map.invalidateSize();
 	addPinsOnMap([{lat:51.5494457,lon:-0.4487664,name:'Cordant Hillingdon'}])
 });
+
+$(document).ready(function() {
+	fetchClientData()
+})
+
+function fetchClientData() {
+	fetch("/clients")
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(data) {
+		showClientsList(data)
+	})
+}
+
+function showClientsList(data) {
+	var clientsList = ""
+	data.forEach(function(client) {
+		clientsList += `<li>${client.name}</li>`;
+	})
+	$("#clients ul").html(clientsList);
+}

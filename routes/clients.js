@@ -12,10 +12,20 @@ google.units('imperial');
 
 router.get('/', function(req, res, next) {
   Client.find(function(err, clients) {
-    if (err) console.log(err);
-    res.render('clients/index', {clients: clients});
+    if(err) {
+      res.json({'ERROR': err});
+    } else {
+      res.json(clients);
+    }
   });
 });
+
+// router.get('/', function(req, res, next) {
+//   Client.find(function(err, clients) {
+//     if (err) console.log(err);
+//     res.render('clients/index', {clients: clients});
+//   });
+// });
 
 router.get('/:id', function(req, res, next) {
   Client.findById(req.params.id, function(err, client) {
