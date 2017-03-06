@@ -30,10 +30,21 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	fetchClientData()
+	fetchAllClientsData()
+	fetchAllCandidatesData()
+
+	var origin1 = {lat: 53.3996968, lng: -1.2817522999999937};
+	var origin2 = 'Greenwich, England';
+	var destinationA = 'Stockholm, Sweden';
+	var destinationB = {lat: 50.087, lng: 14.421};
+	var origins = [origin1, origin2];
+	var destinations = [destinationA, destinationB];
+	var modeOfTransport = "WALKING"
+
+	getDistanceMatrix(origins, destinations, modeOfTransport)
 })
 
-function fetchClientData() {
+function fetchAllClientsData() {
 	fetch("/clients")
 	.then(function(response) {
 		return response.json();
@@ -49,4 +60,34 @@ function showClientsList(data) {
 		clientsList += `<li>${client.name}</li>`;
 	})
 	$("#clients ul").html(clientsList);
+}
+
+function fetchAllCandidatesData() {
+	fetch("/candidates")
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(data) {
+		$("#candidates ul").text("CANDIDATES GO HERE");
+	})
+}
+
+function getDistanceMatrix(origins, destinations, modeOfTransport) {
+	var service = new google.maps.DistanceMatrixService;
+	service.getDistanceMatrix({
+		origins: origins,
+		destinations: destinations,
+		travelMode: modeOfTransport,
+		unitSystem: google.maps.UnitSystem.METRIC,
+		avoidHighways: false,
+		avoidTolls: false
+	}, function(response, status) {
+		if (status !== 'OK') {
+			alert('Error was: ' + status);
+		} else {
+			console.log(response)
+			return response;
+			}
+		}
+	)
 }
