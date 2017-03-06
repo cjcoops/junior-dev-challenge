@@ -27,3 +27,5 @@ if(process.env.NODE_ENV === "test"){
     console.log('listening on '+ config.port);
   });
 }
+
+module.exports = app;
