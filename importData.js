@@ -12,24 +12,28 @@ mongoose.connect(config.db)
 
 mongoose.connection.on("error", console.error.bind(console, "connection error"));
 
+// mongoose.connection.once("open", function() {
+//   console.log("Connection succeeded.");
+//   // for (var i in mongoose.connection.collections) {
+//   //   mongoose.connection.collections[i].remove(function() {})
+// // }
+// });
+
 mongoose.connection.once("open", function() {
-    console.log("Connection succeeded.");
-    for (var i in mongoose.connection.collections) {
-      mongoose.connection.collections[i].remove(function() {
-        clientData.Clients.forEach(function(client) {
-          var newClient = new Client(client);
-          newClient.save(function(err) {
-            if (err) throw err;
-            console.log(newClient.name + " SAVED!")
-          })
-        })
-        candidateData.Candidates.forEach(function(candidate) {
-          var newCandidate = new Candidate(candidate);
-          newCandidate.save(function(err) {
-            if (err) throw err;
-            console.log(newCandidate.name + " SAVED!")
-          })
-        })
-      });
-    }
+  console.log("Connection succeeded.");
+
+  clientData.Clients.forEach(function(client) {
+    var newClient = new Client(client);
+    newClient.save(function(err) {
+      if (err) throw err;
+      console.log(newClient.name + " SAVED!")
+    })
+  })
+  
+  candidateData.Candidates.forEach(function(candidate) {
+    Candidate.create(candidate,function(err) {
+      if (err) throw err;
+      console.log(candidate.name + " SAVED!")
+    })
+  })
 });
