@@ -49,6 +49,8 @@ function displayDistances(clientId) {
 // takes client and candidate as arguments and displays a list of distances/times between the two
 function getDistanceMatrix(client, candidate) {
 	var service = new google.maps.DistanceMatrixService;
+	var modeOfTransport = getModeOfTransport(candidate)
+	var googleModeOfTransport = getGoogleModeOfTransport(candidate);
 	service.getDistanceMatrix({
 		origins: [client.postcode],
 		destinations: [candidate.postcode],
@@ -66,7 +68,7 @@ function getDistanceMatrix(client, candidate) {
 				addCandidateToMap(candidate);
 				var distance = journey.distance.text;
 				var time = journey.duration.text;
-				$("#candidates ul").append(`<li>${name} is ${distance} away from ${client.name}. It will take ${time} to get there!</li>`);
+				$("#candidates ul").append(`<li>${name} is ${distance} away from ${client.name}. It will take ${time} to get there by ${modeOfTransport}</li>`);
 			}
 		}
 	});
@@ -80,4 +82,29 @@ function addCandidateToMap(candidate) {
 			addPinsOnMap([{lat:results[0].geometry.location.lat(),lon:results[0].geometry.location.lng(),name:candidate.name}]);
 		}
 	});
+}
+
+function getGoogleModeOfTransport(candidate) {
+	if (candidate.modeOfTransport) {
+		var type = candidate.modeOfTransport.type;
+		convertModeOfTransportToGoogleModes(type);
+	} else {
+		return "DRIVING";
+	}
+}
+
+function convertModeOfTransportToGoogleModes(type) {
+	if (type == "bike") {
+		return "BICYCLING";
+	} else {
+		return "DRIVING";
+	}
+}
+
+function getModeOfTransport(candidate) {
+	if (candidate.modeOfTransport) {
+		return candidate.modeOfTransport.type;
+	} else {
+		return "car";
+	}
 }
