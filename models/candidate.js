@@ -1,3 +1,6 @@
+//candidate table model
+//uses mongoose as the ORM as good for validating data
+
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
@@ -13,4 +16,4 @@ var candidateSchema = new Schema({
 
 var Candidate = mongoose.model('Candidate', candidateSchema );
 
-module.exports = Candidate
+module.exports = Candidate;

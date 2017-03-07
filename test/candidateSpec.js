@@ -1,3 +1,5 @@
+//tests for candidate model
+
 "use strict";
 
 var expect = require('chai').expect;
@@ -14,10 +16,10 @@ describe('Candidate:model', function() {
 
     Candidate.create(candidate, function (err, createdCandidate) {
       expect(err).not.to.exist;
-      expect(createdCandidate.name).to.equal("Chris")
-      expect(createdCandidate.postcode).to.equal("N1 4TY")
-      expect(createdCandidate.modeOfTransport.type).to.equal("bike")
-      expect(createdCandidate.modeOfTransport.speed).to.equal(15.5)
+      expect(createdCandidate.name).to.equal("Chris");
+      expect(createdCandidate.postcode).to.equal("N1 4TY");
+      expect(createdCandidate.modeOfTransport.type).to.equal("bike");
+      expect(createdCandidate.modeOfTransport.speed).to.equal(15.5);
       done();
     });
   });

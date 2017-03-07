@@ -1,3 +1,5 @@
+//tests for client model
+
 "use strict";
 
 var expect = require('chai').expect;

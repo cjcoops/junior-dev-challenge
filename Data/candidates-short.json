@@ -8,14 +8,6 @@
 		}
 	},
 	{
-		"name": "Pavel Smirnoff",
-		"postcode": "B69 1EQ",
-		"modeOfTransport": {
-			"type": "bike",
-			"speed": 15.5
-		}
-	},
-	{
 		"name": "Gunther Paulaner",
 		"postcode": "B30 1DH",
 		"modeOfTransport": {
@@ -32,8 +24,32 @@
 		}
 	},
 	{
-		"name": "Pierre Guinness",
-		"postcode": "B10 9NN",
+		"name": "Nathan Pilsner",
+		"postcode": "B20 3PU",
+		"modeOfTransport": {
+			"type": "car",
+			"speed": 50
+		}
+	},
+	{
+		"name": "Pavel Heineken",
+		"postcode": "B19 1HP",
+		"modeOfTransport": {
+			"type": "car",
+			"speed": 50
+		}
+	},
+	{
+		"name": "Juan Artois",
+		"postcode": "B23 5LD"
+	},
+	{
+		"name": "Jacques Desperados",
+		"postcode": "B9 5AA"
+	},
+	{
+		"name": "Pierre Paulaner",
+		"postcode": "B6 7PT",
 		"modeOfTransport": {
 			"type": "bike",
 			"speed": 15.5

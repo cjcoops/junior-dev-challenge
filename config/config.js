@@ -1,3 +1,5 @@
+//configuration settings for port and database based on environment
+
 var config = {
 	port: process.env.PORT || 3000,
 	db: process.env.DATABASE || "mongodb://localhost/cordant_dev",

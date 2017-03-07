@@ -1,3 +1,6 @@
+//controller for clients
+//route returns all clients as json
+
 var express = require('express');
 var router = express.Router();
 var Client = require('../models/client');

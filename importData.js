@@ -1,3 +1,5 @@
+//a script to import the data into the database
+
 'use strict';
 
 var config = require('./config/config');
@@ -6,7 +8,7 @@ var Client = require('./models/client');
 var Candidate = require('./models/candidate');
 
 var clientData = require('./Data/locations.json')
-var candidateData = require('./Data/candidates.json')
+var candidateData = require('./Data/candidates-short.json')
 
 mongoose.connect(config.db)
 
@@ -14,9 +16,9 @@ mongoose.connection.on("error", console.error.bind(console, "connection error"))
 
 // mongoose.connection.once("open", function() {
 //   console.log("Connection succeeded.");
-//   // for (var i in mongoose.connection.collections) {
-//   //   mongoose.connection.collections[i].remove(function() {})
-// // }
+//   for (var i in mongoose.connection.collections) {
+//     mongoose.connection.collections[i].remove(function() {})
+// }
 // });
 
 mongoose.connection.once("open", function() {
@@ -29,7 +31,7 @@ mongoose.connection.once("open", function() {
       console.log(newClient.name + " SAVED!")
     })
   })
-  
+
   candidateData.Candidates.forEach(function(candidate) {
     Candidate.create(candidate,function(err) {
       if (err) throw err;

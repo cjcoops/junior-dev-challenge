@@ -1,3 +1,5 @@
+//tests for controller
+
 process.env.NODE_ENV = 'test';
 
 var chai = require('chai');
@@ -7,8 +9,6 @@ var mongoose = require("mongoose");
 var server = require('../app');
 var Client = require("../models/client");
 var Candidate = require("../models/candidate");
-
-// var utils = require('./utils');
 
 var should = chai.should();
 chai.use(chaiHttp);
