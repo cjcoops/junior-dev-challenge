@@ -25,6 +25,7 @@ function makeUrlChangeShowDistances() {
 
 function showDistances() {
 	var id = getId(window.location);
+	$("#candidates ul").html("");
 	displayDistances(id);
 }
 
@@ -45,7 +46,7 @@ function displayDistances(clientId) {
 	});
 }
 
-//takes client and candidate as arguments and displays a list of distances/times between the two
+// takes client and candidate as arguments and displays a list of distances/times between the two
 function getDistanceMatrix(client, candidate) {
 	var service = new google.maps.DistanceMatrixService;
 	service.getDistanceMatrix({
@@ -62,10 +63,21 @@ function getDistanceMatrix(client, candidate) {
 			var name = candidate.name;
 			var journey = response.rows[0].elements[0];
 			if (journey.status == "OK") {
+				addCandidateToMap(candidate);
 				var distance = journey.distance.text;
 				var time = journey.duration.text;
 				$("#candidates ul").append(`<li>${name} is ${distance} away from ${client.name}. It will take ${time} to get there!</li>`);
 			}
+		}
+	});
+}
+
+function addCandidateToMap(candidate) {
+	var geocoder = new google.maps.Geocoder();
+	var postcode = candidate.postcode;
+	geocoder.geocode({'address': postcode}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			addPinsOnMap([{lat:results[0].geometry.location.lat(),lon:results[0].geometry.location.lng(),name:candidate.name}]);
 		}
 	});
 }

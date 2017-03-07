@@ -1,3 +1,5 @@
+//node-express server
+
 var express = require('express');
 var config = require('./config/config');
 var path = require('path');

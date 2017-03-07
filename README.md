@@ -4,8 +4,12 @@
 * Error message for if postcode is not recognised and there are no results
 * Use preferred mode of transport
 * Front end testing
-* Pin candidates on map
 * Define a route in the controller for getting a single client
+
+#### Challenges
+* Initially played around with the Google Distance Matrix on the server side (on Sunday) but when I got the spec it made more sense to do this on the front end.
+* Trying not to exceed Google API limit - used a slimmed down data set for playing around with.
+
 
 #### Resources
 
